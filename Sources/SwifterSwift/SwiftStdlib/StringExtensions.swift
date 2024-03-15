@@ -262,7 +262,7 @@ public extension String {
         #if os(Linux) || targetEnvironment(macCatalyst)
         return scanner.scanDecimal() != nil && scanner.isAtEnd
         #else
-        return scanner.scanDecimal(nil) && scanner.isAtEnd
+        return scanner.scanDecimal() != nil && scanner.isAtEnd
         #endif
     }
     #endif
