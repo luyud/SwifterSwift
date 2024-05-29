@@ -262,7 +262,11 @@ public extension String {
         #if os(Linux) || targetEnvironment(macCatalyst)
         return scanner.scanDecimal() != nil && scanner.isAtEnd
         #else
-        return scanner.scanDecimal() != nil && scanner.isAtEnd
+        if #available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *) {
+            return scanner.scanDecimal() != nil && scanner.isAtEnd
+        } else {
+            return scanner.scanDecimal(nil) && scanner.isAtEnd
+        }
         #endif
     }
     #endif
