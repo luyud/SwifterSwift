@@ -1,4 +1,4 @@
-// FileManagerExtensions.swift - Copyright 2024 SwifterSwift
+// FileManagerExtensions.swift - Copyright 2025 SwifterSwift
 
 #if canImport(Foundation)
 import Foundation
@@ -20,7 +20,7 @@ public extension FileManager {
         return json as? [String: Any]
     }
 
-    #if !os(Linux)
+    #if !os(Linux) && !os(Android)
     /// SwifterSwift: Read from a JSON file with a given filename.
     ///
     /// - Parameters:

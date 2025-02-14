@@ -1,4 +1,4 @@
-// SequenceExtensions.swift - Copyright 2024 SwifterSwift
+// SequenceExtensions.swift - Copyright 2025 SwifterSwift
 
 public extension Sequence {
     /// SwifterSwift: Check if all elements in collection match a condition.
@@ -42,20 +42,6 @@ public extension Sequence {
     /// - Returns: the array with rejected values filtered from it.
     func reject(where condition: (Element) throws -> Bool) rethrows -> [Element] {
         return try filter { return try !condition($0) }
-    }
-
-    /// SwifterSwift: Get element count based on condition.
-    ///
-    ///        [2, 2, 4, 7].count(where: {$0 % 2 == 0}) -> 3
-    ///
-    /// - Parameter condition: condition to evaluate each element against.
-    /// - Returns: number of times the condition evaluated to true.
-    func count(where condition: (Element) throws -> Bool) rethrows -> Int {
-        var count = 0
-        for element in self where try condition(element) {
-            count += 1
-        }
-        return count
     }
 
     /// SwifterSwift: Iterate over a collection in reverse order. (right to left)

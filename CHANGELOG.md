@@ -4,6 +4,8 @@ The changelog for **SwifterSwift**. Also see the [releases](https://github.com/S
 
 ## Upcoming Release
 ### Added
+- **Android**
+  - Added Android platform support. [#1230](https://github.com/SwifterSwift/SwifterSwift/pull/1230) by [Marc Prud'hommeaux](https://github.com/marcprux)
 
 ### Changed
 - **String**
@@ -11,10 +13,15 @@ The changelog for **SwifterSwift**. Also see the [releases](https://github.com/S
 
 ### Fixed
 - **Examples** : Added "import Foundation" to Foundation Extension Playground page for Date() extension to work properly on Mac
+- **Array**
+  - `init(unsafeUninitializedCapacity:initializedWith:)` initializedCount should be eaqule to the number of successfully initialized elements, Ensure that the Array properly release allocated memory in case of an error.[#1222](https://github.com/SwifterSwift/SwifterSwift/pull/1222) by [fallwd](https://github.com/fallwd)
+- **FloatingPoint**
+  - Calculate `ceil` and `floor` using `rounded(_:)`, and `√` using `squareRoot()`, instead of using `Foundation` functions. [#1231](https://github.com/SwifterSwift/SwifterSwift/pull/1231) by [guykogus](https://github.com/guykogus)
 
 ### Deprecated
 
 ### Removed
+- Sequence's `count(where:)` method, as it already exists in stdlib. [#1221](https://github.com/SwifterSwift/SwifterSwift/pull/1221) by [vikingosegundo](https://github.com/vikingosegundo)
 
 ## [v7.0.0](https://github.com/SwifterSwift/SwifterSwift/releases/tag/7.0.0)
 ### Fixed

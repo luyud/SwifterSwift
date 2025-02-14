@@ -1,4 +1,4 @@
-// StringExtensions.swift - Copyright 2024 SwifterSwift
+// StringExtensions.swift - Copyright 2025 SwifterSwift
 
 #if canImport(Foundation)
 import Foundation
@@ -259,7 +259,7 @@ public extension String {
     var isNumeric: Bool {
         let scanner = Scanner(string: self)
         scanner.locale = NSLocale.current
-        #if os(Linux) || targetEnvironment(macCatalyst)
+        #if os(Linux) || os(Android) || targetEnvironment(macCatalyst)
         return scanner.scanDecimal() != nil && scanner.isAtEnd
         #else
         if #available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *) {
@@ -1250,7 +1250,7 @@ public extension String {
     #endif
 }
 
-#if !os(Linux)
+#if !os(Linux) && !os(Android)
 
 // MARK: - NSAttributedString
 
