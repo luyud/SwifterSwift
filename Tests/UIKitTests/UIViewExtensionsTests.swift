@@ -1,4 +1,4 @@
-// UIViewExtensionsTests.swift - Copyright 2024 SwifterSwift
+// UIViewExtensionsTests.swift - Copyright 2025 SwifterSwift
 
 @testable import SwifterSwift
 import XCTest
@@ -682,6 +682,20 @@ final class UIViewExtensionsTests: XCTestCase { // swiftlint:disable:this type_b
         XCTAssert(view.subviews.first is UIVisualEffectView)
         view.removeBlur()
         XCTAssertFalse(view.subviews.first is UIVisualEffectView)
+    }
+
+    func testAddBottomSeparator() throws {
+        let view = UIView()
+        let expectedColor = UIColor.red
+        let expectedHeight: CGFloat = 2.0
+
+        view.addBottomSeparator(color: expectedColor, height: expectedHeight)
+
+        let separator = try XCTUnwrap(view.subviews.first, "Separator not found")
+
+        XCTAssertEqual(view.subviews.count, 1)
+        XCTAssertEqual(separator.backgroundColor, expectedColor)
+        XCTAssertEqual(separator.frame.height, expectedHeight)
     }
 }
 

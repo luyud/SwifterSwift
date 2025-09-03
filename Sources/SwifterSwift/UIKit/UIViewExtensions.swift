@@ -1,4 +1,4 @@
-// UIViewExtensions.swift - Copyright 2024 SwifterSwift
+// UIViewExtensions.swift - Copyright 2025 SwifterSwift
 
 #if canImport(UIKit) && !os(watchOS)
 import UIKit
@@ -74,44 +74,6 @@ public extension UIView {
 // MARK: - Properties
 
 public extension UIView {
-    /// SwifterSwift: Border color of view; also inspectable from Storyboard.
-    var layerBorderColor: UIColor? {
-        get {
-            guard let color = layer.borderColor else { return nil }
-            return UIColor(cgColor: color)
-        }
-        set {
-            guard let color = newValue else {
-                layer.borderColor = nil
-                return
-            }
-            // Fix React-Native conflict issue
-            guard String(describing: type(of: color)) != "__NSCFType" else { return }
-            layer.borderColor = color.cgColor
-        }
-    }
-
-    /// SwifterSwift: Border width of view; also inspectable from Storyboard.
-    var layerBorderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
-    }
-
-    /// SwifterSwift: Corner radius of view; also inspectable from Storyboard.
-    var layerCornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
-        set {
-            layer.masksToBounds = true
-            layer.cornerRadius = abs(CGFloat(Int(newValue * 100)) / 100)
-        }
-    }
-
     /// SwifterSwift: Height of view.
     var height: CGFloat {
         get {
@@ -133,57 +95,6 @@ public extension UIView {
         guard size != .zero else { return nil }
         return UIGraphicsImageRenderer(size: layer.frame.size).image { context in
             layer.render(in: context.cgContext)
-        }
-    }
-
-    /// SwifterSwift: Shadow color of view; also inspectable from Storyboard.
-    var layerShadowColor: UIColor? {
-        get {
-            guard let color = layer.shadowColor else { return nil }
-            return UIColor(cgColor: color)
-        }
-        set {
-            layer.shadowColor = newValue?.cgColor
-        }
-    }
-
-    /// SwifterSwift: Shadow offset of view; also inspectable from Storyboard.
-    var layerShadowOffset: CGSize {
-        get {
-            return layer.shadowOffset
-        }
-        set {
-            layer.shadowOffset = newValue
-        }
-    }
-
-    /// SwifterSwift: Shadow opacity of view; also inspectable from Storyboard.
-    var layerShadowOpacity: Float {
-        get {
-            return layer.shadowOpacity
-        }
-        set {
-            layer.shadowOpacity = newValue
-        }
-    }
-
-    /// SwifterSwift: Shadow radius of view; also inspectable from Storyboard.
-    var layerShadowRadius: CGFloat {
-        get {
-            return layer.shadowRadius
-        }
-        set {
-            layer.shadowRadius = newValue
-        }
-    }
-
-    /// SwifterSwift: Masks to bounds of view; also inspectable from Storyboard.
-    var masksToBounds: Bool {
-        get {
-            return layer.masksToBounds
-        }
-        set {
-            layer.masksToBounds = newValue
         }
     }
 
@@ -699,6 +610,29 @@ public extension UIView {
             }
         }
         return views
+    }
+
+    /// SwifterSwift: Adds a horizontal separator to the bottom of the view.
+    ///
+    ///     let view = UIView()
+    ///     view.addBottomSeparator(color: .lightGray, height: 1, spacing: 8)
+    ///
+    /// - Parameters:
+    ///   - color: The separator color. Default is `.black`.
+    ///   - height: The height of the separator. Default is `1`.
+    ///   - spacing: Spacing from the bottom edge. Default is `0`.
+    func addBottomSeparator(color: UIColor = .black, height: CGFloat = 1, spacing: CGFloat = 0) {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = color
+        line.layer.cornerRadius = height / 2
+        addSubview(line)
+        NSLayoutConstraint.activate([
+            line.heightAnchor.constraint(equalToConstant: height),
+            line.leadingAnchor.constraint(equalTo: leadingAnchor),
+            line.trailingAnchor.constraint(equalTo: trailingAnchor),
+            line.bottomAnchor.constraint(equalTo: bottomAnchor, constant: spacing)
+        ])
     }
 }
 

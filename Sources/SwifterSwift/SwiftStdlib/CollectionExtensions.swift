@@ -1,4 +1,4 @@
-// CollectionExtensions.swift - Copyright 2024 SwifterSwift
+// CollectionExtensions.swift - Copyright 2025 SwifterSwift
 
 #if canImport(Dispatch)
 import Dispatch
@@ -63,7 +63,7 @@ public extension Collection {
         return slices
     }
 
-    #if !os(Linux)
+    #if !os(Linux) && !os(Android)
     /// SwifterSwift: Get all indices where condition is met.
     ///
     ///     [1, 7, 1, 2, 4, 1, 8].indices(where: { $0 == 1 }) -> [0, 2, 5]

@@ -1,4 +1,4 @@
-// StringExtensions.swift - Copyright 2024 SwifterSwift
+// StringExtensions.swift - Copyright 2025 SwifterSwift
 
 #if canImport(Foundation)
 import Foundation
@@ -259,7 +259,7 @@ public extension String {
     var isNumeric: Bool {
         let scanner = Scanner(string: self)
         scanner.locale = NSLocale.current
-        #if os(Linux) || targetEnvironment(macCatalyst)
+        #if os(Linux) || os(Android) || targetEnvironment(macCatalyst)
         return scanner.scanDecimal() != nil && scanner.isAtEnd
         #else
         if #available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *) {
@@ -1084,8 +1084,8 @@ public extension String {
     ///   - lhs: String to check on regex pattern.
     ///   - rhs: Regex pattern to match against.
     /// - Returns: true if string matches the pattern.
-    static func ~= (lhs: String, rhs: String) -> Bool {
-        return rhs.range(of: lhs, options: .regularExpression) != nil
+    static func =~ (lhs: String, rhs: String) -> Bool {
+        return lhs.range(of: rhs, options: .regularExpression) != nil
     }
     #endif
 
@@ -1096,9 +1096,9 @@ public extension String {
     ///   - lhs: String to check on regex.
     ///   - rhs: Regex to match against.
     /// - Returns: `true` if there is at least one match for the regex in the string.
-    static func ~= (lhs: NSRegularExpression, rhs: String) -> Bool {
-        let range = NSRange(rhs.startIndex..<rhs.endIndex, in: rhs)
-        return lhs.firstMatch(in: rhs, range: range) != nil
+    static func =~ (lhs: String, rhs: NSRegularExpression) -> Bool {
+        let range = NSRange(lhs.startIndex..<lhs.endIndex, in: lhs)
+        return rhs.firstMatch(in: lhs, range: range) != nil
     }
     #endif
 
@@ -1250,7 +1250,7 @@ public extension String {
     #endif
 }
 
-#if !os(Linux)
+#if !os(Linux) && !os(Android)
 
 // MARK: - NSAttributedString
 
@@ -1414,4 +1414,10 @@ public extension String {
     }
 }
 
+#endif
+
+// MARK: Operators
+
+#if canImport(Foundation)
+infix operator =~: ComparisonPrecedence
 #endif
