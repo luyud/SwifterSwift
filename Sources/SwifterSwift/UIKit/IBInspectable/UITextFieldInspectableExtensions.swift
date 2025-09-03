@@ -5,7 +5,7 @@ import UIKit
 
 public extension UITextField {
     /// SwifterSwift: Left view tint color.
-    @IBInspectable var leftViewTintColor: UIColor? {
+     var leftViewTintColor: UIColor? {
         get {
             guard let iconView = leftView as? UIImageView else { return nil }
             return iconView.tintColor
@@ -18,7 +18,7 @@ public extension UITextField {
     }
 
     /// SwifterSwift: Right view tint color.
-    @IBInspectable var rightViewTintColor: UIColor? {
+     var rightViewTintColor: UIColor? {
         get {
             guard let iconView = rightView as? UIImageView else { return nil }
             return iconView.tintColor
